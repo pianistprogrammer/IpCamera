@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PianistProgrammer IP Web Cam</title>
+    <style>
+        #center {
+            position: absolute;
+            margin: -100px 0 0 -300px;
+            top: 30%;
+            left: 50%;
+        }
+        .text-center{
+            text-align: center
+        }
+        .love{
+            color:red
+        }
+    </style>
+</head>
+
+<body>
+    <div id="center">
+        <img id="image">
+        <p class="text-center">
+            With <span class="love"> &#x2665;</span> by <a href="https://github.com/pianistprogrammer">PianistProgrammer</a>
+        </p>
+    </div>
+
+    <script src="http://192.168.1.101:3000/socket.io/socket.io.js" ></script>
+    <script>
+        const socket = io.connect('http://192.168.1.101:3000');
+        socket.on('image', (image) => {
+            const imgElelment = document.getElementById('image');
+            imgElelment.src = `data:image/jpeg;base64,${image}`;
+        })
+    </script>
+</body>
+
+</html>
